@@ -25,14 +25,14 @@ class DamageRandomEffect : Challenge {
     }
 
     override fun register() {
-        damage
+        damage.register()
     }
 
     override fun unregister() {
         damage.unregister()
     }
 
-    private val damage = listen<EntityDamageEvent>() {
+    private val damage = listen<EntityDamageEvent>(register = false) {
         if (it.entity !is Player) return@listen
         val player: Player = it.entity as Player
         if (player.isBlocking) return@listen
